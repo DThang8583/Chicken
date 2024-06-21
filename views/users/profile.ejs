@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
+    <style>
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .image-container figure {
+            width: 128px;
+            height: 128px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .image-container img {
+            border-radius: 50%;
+            border: 0.5px solid black;
+            object-fit: cover;
+            width: 100%;
+            height: 100%
+        }
+
+        .action {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('../components/navbar') %>
+
+        <div class="container">
+            <h1 class="title">My profile</h1>
+            <p class="subtitle">Manage profile information for account security</p>
+
+            <div class="columns">
+                <div class="column is-two-thirds">
+                    <form action="/auth/profile" method="POST">
+                        <div class="field">
+                            <label class="label">User name</label>
+                            <div class="control">
+                                <input class="input" type="text" value="<%= user.membername %>" disabled>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Name</label>
+                            <div class="control">
+                                <input class="input" type="text" name="name" value="<%= user.name %>">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Email</label>
+                            <div class="control">
+                                <input class="input" type="email" name="email" value="user@example.com">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Phone number</label>
+                            <div class="control">
+                                <input class="input" type="tel" name="phone" value="0327953466">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Gender</label>
+                            <div class="control">
+                                <label class="radio">
+                                    <input type="radio" name="gender" value="Nam">Nam
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" name="gender" value="Nữ">Nữ
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Year of birth</label>
+                            <div class="control">
+                                <input class="input" type="number" name="YOB" value="<%= user.YOB %>">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control action">
+                                <button class="button is-primary" type="submit">Save update</button>
+                                <a href="/auth/change-password" class="button is-primary">Change password</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="column is-one-third">
+                    <div class="field image-container">
+                        <figure>
+                            <img src="data:image/jpeg;base64,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"
+                                alt="User Avatar">
+                        </figure>
+                        <div class="control">
+                            <input style="z-index: 99;cursor: pointer" class="file-input" type="file" name="avatar">
+                            <button class="button is-primary is-fullwidth">Chọn Ảnh</button>
+                            <p class="help">Maximum file size 1 MB</p>
+                            <p class="help">Format: .JPEG, .PNG</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <style>
+        .field-label {
+            text-align: left;
+            padding-bottom: 0.5rem;
+        }
+
+        .help {
+            color: red;
+        }
+    </style>
+</head>
+
+<body style="background-color: black;">
+    <section class="section">
+        <div class="container">
+            <h1 class="title" style="text-align: center">Register</h1>
+            <form id="registerForm" action="/auth/register" method="POST">
+                <div class="field">
+                    <label class="label">Username:</label>
+                    <div class="control">
+                        <input class="input" type="text" name="membername" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Password:</label>
+                    <div class="control">
+                        <input class="input" type="password" name="password" id="password" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Confirm Password:</label>
+                    <div class="control">
+                        <input class="input" type="password" name="confirm_password" id="confirm_password" required>
+                    </div>
+                    <p id="passwordError" class="help is-hidden">Passwords do not match!</p>
+                </div>
+                <div class="field">
+                    <label class="label">Name:</label>
+                    <div class="control">
+                        <input class="input" type="text" name="name" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Year of Birth:</label>
+                    <div class="control">
+                        <input class="input" type="number" name="YOB" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control" style="display: flex; justify-content: space-between">
+                        <a href="/auth/login">I already have an account</a>
+                        <p class="buttons">
+                            <button class="button is-link" type="submit">Register</button>
+                            <a class="button is-danger" href="/">Cancel</a>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function (event) {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+            const passwordError = document.getElementById('passwordError');
+
+            if (password !== confirmPassword) {
+                event.preventDefault();
+                passwordError.classList.remove('is-hidden');
+            } else {
+                passwordError.classList.add('is-hidden');
+            }
+        });
+    </script>
+</body>
+
+</html>
